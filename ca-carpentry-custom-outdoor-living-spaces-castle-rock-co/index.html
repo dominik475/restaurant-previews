@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CA Carpentry - Custom Outdoor Living Spaces — Professional General Contracting serving Castle Rock, CO and surrounding areas." />
+  <title>CA Carpentry - Custom Outdoor Living Spaces | General Contracting in Castle Rock, CO</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── CSS Reset & Variables ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:     #1B2631;
+      --accent:      #E67E22;
+      --dark:        #0d1117;
+      --dark-2:      #161b22;
+      --dark-3:      #21262d;
+      --surface:     #1c2128;
+      --text-main:   #e6edf3;
+      --text-muted:  #8b949e;
+      --border:      #30363d;
+      --white:       #ffffff;
+      --radius:      8px;
+      --radius-lg:   16px;
+      --shadow:      0 4px 24px rgba(0,0,0,.45);
+      --shadow-sm:   0 2px 8px rgba(0,0,0,.30);
+      --font:        'Inter', system-ui, -apple-system, sans-serif;
+      --max-w:       1140px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Utility ───────────────────────────────────────────────────── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.25rem; }
+    .section    { padding: 5rem 0; }
+    .text-accent { color: var(--accent); }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .85rem 2rem; border-radius: var(--radius);
+      font-family: var(--font); font-size: 1rem; font-weight: 700;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); opacity: .93; }
+    .btn-primary {
+      background: var(--accent); color: var(--white);
+      box-shadow: 0 4px 16px rgba(0,0,0,.4);
+    }
+    .btn-outline {
+      background: transparent; color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    .btn-outline:hover { background: var(--accent); color: var(--white); opacity: 1; }
+    .badge {
+      display: inline-block; padding: .3rem .9rem;
+      background: rgba(255,255,255,.08); border: 1px solid var(--border);
+      border-radius: 50px; font-size: .78rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase; color: var(--accent);
+    }
+
+    /* ── NAV ───────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,17,23,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-size: 1.15rem; font-weight: 800;
+      color: var(--text-main); text-decoration: none; letter-spacing: -.01em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: .9rem; font-weight: 500;
+      transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--text-main); }
+    .nav-cta { margin-left: 1rem; }
+
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: .5rem;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text-main); border-radius: 2px;
+      transition: all .25s;
+    }
+    .mobile-menu {
+      display: none; flex-direction: column;
+      background: var(--dark-2); border-bottom: 1px solid var(--border);
+      padding: 1rem 1.25rem 1.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--text-muted); text-decoration: none;
+      font-weight: 500; padding: .65rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:last-of-type { border-bottom: none; }
+    .mobile-menu .btn { margin-top: 1rem; width: 100%; justify-content: center; }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── HERO ──────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(135deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.5) 60%, rgba(0,0,0,.7) 100%),
+        url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1400&q=80') center / cover no-repeat;
+      display: flex; align-items: center;
+      padding-top: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 60%, var(--dark) 100%);
+      pointer-events: none;
+    }
+    /* Accent line at top */
+    .hero::after {
+      content: '';
+      position: absolute; top: 64px; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 780px; padding: 4rem 0;
+    }
+    .hero-badge { margin-bottom: 1.5rem; }
+    .hero h1 {
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+      font-weight: 900; line-height: 1.08; letter-spacing: -.03em;
+      color: var(--white); margin-bottom: 1.25rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-tagline {
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      color: rgba(230,237,243,.8);
+      max-width: 580px; margin-bottom: 2.5rem; line-height: 1.5;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+
+    /* Phone pill in hero */
+    .hero-phone {
+      display: inline-flex; align-items: center; gap: .6rem;
+      padding: .85rem 1.75rem;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius);
+      color: var(--white); text-decoration: none;
+      font-size: 1.15rem; font-weight: 700;
+      letter-spacing: .01em;
+      transition: background .2s, border-color .2s;
+    }
+    .hero-phone:hover { background: rgba(255,255,255,.13); border-color: var(--accent); }
+    .hero-phone svg { flex-shrink: 0; }
+
+    /* trust strip */
+    .trust-strip {
+      border-top: 1px solid var(--border);
+      background: var(--dark-2);
+      padding: 1.25rem 0;
+    }
+    .trust-items {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: .88rem; font-weight: 500; color: var(--text-muted);
+    }
+    .trust-item svg { color: var(--accent); flex-shrink: 0; }
+
+    /* ── SERVICES ──────────────────────────────────────────────────── */
+    .services { background: var(--dark); }
+    .section-header {
+      text-align: center; margin-bottom: 3.5rem;
+    }
+    .section-header h2 {
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 800; letter-spacing: -.02em;
+      color: var(--text-main); margin-top: .75rem;
+    }
+    .section-header p {
+      color: var(--text-muted); font-size: 1.05rem;
+      max-width: 520px; margin: .9rem auto 0;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .3s ease;
+    }
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      font-size: 2.4rem; margin-bottom: 1rem; display: block;
+      line-height: 1;
+    }
+    .service-card h3 {
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--text-main); margin-bottom: .6rem;
+    }
+    .service-card p {
+      color: var(--text-muted); font-size: .95rem; line-height: 1.65;
+    }
+
+    /* ── ABOUT ─────────────────────────────────────────────────────── */
+    .about { background: var(--dark-2); }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .about-img-wrap {
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow); position: relative;
+    }
+    .about-img-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      border: 2px solid var(--accent);
+      border-radius: var(--radius-lg);
+      opacity: .35; pointer-events: none;
+    }
+    .about-img-wrap img {
+      width: 100%; height: 440px; object-fit: cover;
+      display: block;
+    }
+    .about-text .badge { margin-bottom: 1.25rem; }
+    .about-text h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 800; letter-spacing: -.02em;
+      color: var(--text-main); margin-bottom: 1.5rem; line-height: 1.2;
+    }
+    .about-text p {
+      color: var(--text-muted); font-size: 1rem; line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+    .about-text p:last-of-type { margin-bottom: 2rem; }
+    .about-stats {
+      display: flex; gap: 2rem; flex-wrap: wrap; margin-top: .5rem;
+    }
+    .stat { text-align: left; }
+    .stat-number {
+      font-size: 2rem; font-weight: 900; color: var(--accent);
+      letter-spacing: -.02em; line-height: 1;
+    }
+    .stat-label { font-size: .8rem; color: var(--text-muted); font-weight: 500; margin-top: .25rem; }
+
+    @media (max-width: 900px) {
+      .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-img-wrap img { height: 280px; }
+    }
+
+    /* ── CONTACT ───────────────────────────────────────────────────── */
+    .contact { background: var(--dark); }
+    .contact-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .contact-top {
+      background: linear-gradient(135deg, var(--primary) 0%, color-mix(in srgb, var(--primary) 60%, var(--dark)) 100%);
+      padding: 3.5rem 3rem;
+      position: relative;
+    }
+    .contact-top::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .contact-top h2 {
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-weight: 800; letter-spacing: -.02em;
+      color: var(--white); margin-bottom: .5rem;
+    }
+    .contact-top p { color: rgba(255,255,255,.72); font-size: 1rem; }
+
+    /* BIG phone CTA */
+    .phone-hero {
+      text-align: center; padding: 3.5rem 2rem; border-bottom: 1px solid var(--border);
+    }
+    .phone-hero-label {
+      font-size: .82rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: .75rem;
+    }
+    .phone-hero-number {
+      display: inline-flex; align-items: center; gap: 1rem;
+      text-decoration: none;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 900; letter-spacing: -.02em;
+      color: var(--text-main);
+      transition: color .2s;
+    }
+    .phone-hero-number:hover { color: var(--accent); }
+    .phone-icon-wrap {
+      width: 56px; height: 56px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      padding: 2.5rem 3rem; gap: 2rem;
+    }
+    .contact-item { display: flex; align-items: flex-start; gap: 1rem; }
+    .contact-item-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: var(--dark-3); border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    .contact-item-label {
+      font-size: .78rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: .25rem;
+    }
+    .contact-item-value {
+      font-size: .98rem; color: var(--text-main); font-weight: 500;
+      word-break: break-all;
+    }
+
+    /* claim CTA */
+    .claim-banner {
+      background: linear-gradient(135deg, var(--dark-3), var(--dark-2));
+      border-top: 1px solid var(--border);
+      padding: 3rem 3rem;
+      text-align: center;
+    }
+    .claim-banner h3 {
+      font-size: 1.4rem; font-weight: 800;
+      color: var(--text-main); margin-bottom: .6rem;
+    }
+    .claim-banner p {
+      color: var(--text-muted); font-size: .95rem; margin-bottom: 1.75rem;
+      max-width: 480px; margin-left: auto; margin-right: auto;
+    }
+
+    @media (max-width: 640px) {
+      .contact-top { padding: 2rem 1.5rem; }
+      .contact-grid { padding: 2rem 1.5rem; }
+      .claim-banner { padding: 2rem 1.5rem; }
+      .phone-hero { padding: 2.5rem 1rem; }
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────────────── */
+    footer {
+      background: var(--dark-2);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+    }
+    .footer-inner {
+      display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: space-between;
+      gap: 1rem;
+    }
+    .footer-brand {
+      font-size: 1rem; font-weight: 700; color: var(--text-main);
+    }
+    .footer-brand span { color: var(--accent); }
+    .footer-copy {
+      font-size: .82rem; color: var(--text-muted); text-align: center;
+    }
+    .footer-copy a {
+      color: var(--text-muted); text-decoration: none;
+      transition: color .15s;
+    }
+    .footer-copy a:hover { color: var(--accent); }
+
+    /* ── Scroll reveal fade-in ─────────────────────────────────────── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">CA Carpentry - Custom Outdoor Living Spaces <span>·</span></a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="tel:(720) 628-0173" class="btn btn-primary nav-cta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.47 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call Now
+      </a>
+      <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu">
+      <a href="#services" onclick="this.closest('.mobile-menu').classList.remove('open')">Services</a>
+      <a href="#about" onclick="this.closest('.mobile-menu').classList.remove('open')">About</a>
+      <a href="#contact" onclick="this.closest('.mobile-menu').classList.remove('open')">Contact</a>
+      <a href="tel:(720) 628-0173" class="btn btn-primary">📞 (720) 628-0173</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content fade-in">
+        <div class="hero-badge">
+          <span class="badge">General Contracting · Castle Rock, CO</span>
+        </div>
+        <h1>CA Carpentry - Custom Outdoor Living Spaces<br><span>Done Right.</span></h1>
+        <p class="hero-tagline">Serving Castle Rock and the surrounding area with quality general contracting you can count on. Licensed, insured, and ready to work.</p>
+        <div class="hero-actions">
+          <a href="tel:(720) 628-0173" class="hero-phone">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.47 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            (720) 628-0173
+          </a>
+          <a href="#services" class="btn btn-outline">View Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TRUST STRIP ── -->
+  <div class="trust-strip">
+    <div class="container">
+      <div class="trust-items">
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Licensed &amp; Insured
+        </div>
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Free Estimates
+        </div>
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Prompt &amp; Reliable
+        </div>
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          5-Star Rated
+        </div>
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Local &amp; Family Owned
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SERVICES ── -->
+  <section class="services section" id="services">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="badge">What We Do</span>
+        <h2>Our <span class="text-accent">Services</span></h2>
+        <p>Quality workmanship on every job — big or small. We show up on time and get it done right.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card fade-in">
+          <span class="service-icon">🔨</span>
+          <h3>Home Improvement</h3>
+          <p>Whatever your home needs — we handle it. Experienced general contractors ready to tackle repairs, upgrades, and full remodels.</p>
+        </div>
+        <div class="service-card fade-in">
+          <span class="service-icon">📋</span>
+          <h3>Project Management</h3>
+          <p>We coordinate trades, manage timelines, and keep your project on budget. One point of contact from start to finish.</p>
+        </div>
+        <div class="service-card fade-in">
+          <span class="service-icon">🏠</span>
+          <h3>Renovations & Additions</h3>
+          <p>Room additions, basement finishes, garage conversions — built to code, on schedule, and exactly as you envisioned.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-img-wrap fade-in">
+          <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80" alt="CA Carpentry - Custom Outdoor Living Spaces at work in Castle Rock" loading="lazy" />
+        </div>
+        <div class="about-text fade-in">
+          <span class="badge">About Us</span>
+          <h2>Your local contractor, ready to get to work</h2>
+          <p>We started this company to give homeowners a contractor they could actually trust — one that shows up when they say they will, does quality work, and stands behind it.</p>
+          <p>Whether it's a repair, renovation, or new construction, we bring the same commitment to every job: treat the customer right, do the work right, and leave the job site clean.</p>
+          <div class="about-stats">
+            <div class="stat">
+              <div class="stat-number">10+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">500+</div>
+              <div class="stat-label">Jobs Completed</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">5★</div>
+              <div class="stat-label">Average Rating</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="contact-wrapper fade-in">
+
+        <div class="contact-top">
+          <h2>Ready to Get Started?</h2>
+          <p>Give us a call or reach out — we'll get back to you fast with a free estimate.</p>
+        </div>
+
+        <!-- BIG PHONE -->
+        <div class="phone-hero">
+          <div class="phone-hero-label">Call or Text Anytime</div>
+          <a href="tel:(720) 628-0173" class="phone-hero-number">
+            <span class="phone-icon-wrap">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.47 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            (720) 628-0173
+          </a>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Address</div>
+              <div class="contact-item-value">4390 Regent St C11 80109, USA<br>Castle Rock, CO</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.47 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Phone</div>
+              <div class="contact-item-value"><a href="tel:(720) 628-0173" style="color:inherit;text-decoration:none;">(720) 628-0173</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-value">chet@cacarpentry.biz</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="claim-banner">
+          <h3>Is This Your Business?</h3>
+          <p>We built this site for you — free of charge. Claim it, customize it, and start getting more calls today.</p>
+          <a href="mailto:dominik@launchsitesco.com?subject=I want to claim my site — CA Carpentry - Custom Outdoor Living Spaces&body=Hi, I'm the owner of CA Carpentry - Custom Outdoor Living Spaces in Castle Rock, CO. I'd like to claim and activate my free website." class="btn btn-primary">
+            Claim This Site — It's Free
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">CA Carpentry - Custom Outdoor Living Spaces <span>·</span> Castle Rock, CO</div>
+      <div class="footer-copy">
+        © 2026 CA Carpentry - Custom Outdoor Living Spaces. All rights reserved. &nbsp;|&nbsp;
+        Professional General Contracting serving Castle Rock and surrounding areas.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+</body>
+</html>

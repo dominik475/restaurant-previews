@@ -334,7 +334,56 @@
     .footer-brand span { color: var(--warm); }
     .footer-copy { font-size: .82rem; color: rgba(255,255,255,.4); text-align: right; }
 
-    /* ── Animations ─────────────────────────────────────────────────── */
+    /* ── FLOATING BUY BAR ─────────────────────────────────────────── */
+    .float-buy {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 999;
+      background: var(--charcoal);
+      border-top: 3px solid var(--warm);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      box-shadow: 0 -8px 40px rgba(0,0,0,.25);
+    }
+    .float-buy-left { display: flex; flex-direction: column; gap: .15rem; }
+    .float-buy-label {
+      font-size: .72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--warm);
+    }
+    .float-buy-headline {
+      font-family: var(--font-head);
+      font-size: 1.05rem; font-weight: 800;
+      color: #fff; line-height: 1.2;
+    }
+    .float-buy-sub { font-size: .82rem; color: rgba(255,255,255,.55); }
+    .float-buy-btn {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--warm); color: #fff;
+      padding: .85rem 2rem; border-radius: var(--radius);
+      font-weight: 800; font-size: 1rem; white-space: nowrap;
+      box-shadow: 0 4px 20px rgba(193,127,69,.5);
+      transition: background .15s, transform .15s;
+      flex-shrink: 0;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    .float-buy-btn:hover { background: #a86d36; transform: translateY(-2px); animation: none; }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(193,127,69,.5); }
+      50% { box-shadow: 0 4px 36px rgba(193,127,69,.85); }
+    }
+    /* push page content up so footer isn't hidden behind bar */
+    body { padding-bottom: 80px; }
+
+    @media (max-width: 600px) {
+      .float-buy { padding: .85rem 1.25rem; gap: 1rem; }
+      .float-buy-sub { display: none; }
+      .float-buy-headline { font-size: .95rem; }
+      .float-buy-btn { padding: .75rem 1.25rem; font-size: .9rem; }
+    }
     .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
     .fade-in.visible { opacity: 1; transform: none; }
   </style>
@@ -548,6 +597,19 @@
       </div>
     </div>
   </footer>
+
+  <!-- ── FLOATING BUY BAR ── -->
+  <div class="float-buy">
+    <div class="float-buy-left">
+      <div class="float-buy-label">⚡ Limited Offer</div>
+      <div class="float-buy-headline">This site is ready for CA Carpentry - Custom Outdoor Living Spaces</div>
+      <div class="float-buy-sub">$499 one-time · $79/mo · Live in 48 hours</div>
+    </div>
+    <a href="mailto:dominik@launchsitesco.com?subject=I want my website — CA Carpentry - Custom Outdoor Living Spaces&body=Hi, I'm the owner of CA Carpentry - Custom Outdoor Living Spaces in Castle Rock, CO. I'd like to get my new website." class="float-buy-btn">
+      Get This Website
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
 
   <script>
     const observer = new IntersectionObserver((entries) => {

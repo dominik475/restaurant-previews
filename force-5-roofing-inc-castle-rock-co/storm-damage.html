@@ -223,8 +223,8 @@ footer{background:#0a0a0a;padding:3rem 0 2rem;border-top:1px solid rgba(255,255,
 .process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;}
 .step{text-align:center;}
 .step-num{width:56px;height:56px;border-radius:50%;background:var(--red);color:#fff;
-            font-size:1.25rem;font-weight:800;display:flex;align-items:center;
-            justify-content:center;margin:0 auto 1rem;}
+            font-size:1.25rem;font-weight:800;display:flex;align-items:center;flex-shrink:0;
+            justify-content:center;margin:0 auto 1rem;min-width:56px;}
 .step h3{font-size:.95rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem;}
 .step p{font-size:.88rem;color:rgba(255,255,255,.6);}
 .section-light .step h3{color:var(--charcoal);}
@@ -295,7 +295,7 @@ footer{background:#0a0a0a;padding:3rem 0 2rem;border-top:1px solid rgba(255,255,
     <div class="section-label">How It Works</div>
     <h2>The Insurance Claims Process</h2>
     <p class="lead">Step by step, from storm to installed roof &mdash; typically 30&ndash;60 days.</p>
-    <div class="process-steps" style="margin-top:2rem;">
+    <div class="process-steps" style="margin-top:2rem;grid-template-columns:repeat(3,1fr);">
       <div class="step">
         <div class="step-num">1</div>
         <h3>Free Inspection First</h3>
